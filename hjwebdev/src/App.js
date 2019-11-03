@@ -5,6 +5,53 @@ import { Container, Table, Row, Col, Navbar, Breadcrumb, Dropdown, DropdownButto
 import anime from 'animejs';
 import Page from './components/Page.js'
 import ProjectTile from './components/ProjectTile.js'
+import { Router } from "react-router";
+import { Route, Switch, Link } from 'react-router-dom'
+import { createBrowserHistory } from 'history';
+import DelayLink from './components/DelayLink.js'
+import { connect } from 'react-redux'
+import { setPageOpacity } from './redux/actions/siteActions'
+import ProjectsSPGPage from './ProjectsSPGPage.js'
+import ProjectsPage from './ProjectsPage.js'
+
+class projectsSABPage extends Component {
+  render(){
+    return (
+      <Page
+        inner={
+          <>
+            <h2>Hello world</h2>
+          </>
+        }
+      />)
+  }
+}
+
+class projectsABPage extends Component {
+  render(){
+    return (
+      <Page
+        inner={
+          <>
+            <h2>Hello world</h2>
+          </>
+        }
+      />)
+  }
+}
+
+class projectsSamAndMaxPage extends Component {
+  render(){
+    return (
+      <Page
+        inner={
+          <>
+            <h2>Hello world</h2>
+          </>
+        }
+      />)
+  }
+}
 
 class App extends Component {
 
@@ -15,7 +62,6 @@ class App extends Component {
   }
 
   componentDidMount(){
-    console.log("componentDidMount", document.querySelector('body'))
       anime({
         targets: [document.querySelector('body')],
         keyframes: [
@@ -23,40 +69,20 @@ class App extends Component {
         ],
         delay: 250,
         easing: 'easeInOutQuad',
-        begin: () => {
-          // footerCar.classList.add("active");
-        },
-        complete: () => {
-          // setTimeout(() => { footerCar.classList.remove("active"); }, 250);
-        },
       });
-      // anime({
-      //   targets: e.target,
-      //   keyframes: [
-      //     {translateX: -5000, duration: 7500},
-      //     {translateX: 5000, duration: 0},
-      //     {translateX: 0, duration: 5000},
-      //   ],
-      //   delay: 500,
-      //   easing: 'easeInOutQuad',
-      //   begin: () => {
-      //     footerCar.classList.add("active");
-      //   },
-      //   complete: () => {
-      //     setTimeout(() => { footerCar.classList.remove("active"); }, 250);
-      //   },
-      // });
   }
 
   render() {
+    console.log("render", this.state)
     return (
       <Container>
+              <Router history={this.props.history}>
         <Row>
           <div className="top-padding"></div>
           <Col sm={2}>
             <img src="/logofinal.png" className="App-logo" alt="logo" />
             <div className="nav-links">
-              <a className="active" href="#">Projects</a>
+              <Link className="active" to={this.props.routes.projects}>Projects</Link>
               <a className="" href="#">About</a>
               <a className="" href="#">Services</a>
               <a className="" href="#">Contact</a>
@@ -66,38 +92,26 @@ class App extends Component {
             <h1>Harry Johnson Web Development</h1>
             <h2>Full-stack developer</h2>
             <div className="mt-3 mx-n3">
-              <Page
-                inner={
-                  <>
-                    <ProjectTile
-                      title="Saint Andrews Bureau Routine Check App"
-                      imgURL="/sabapp.png"
-                      imgAlt="SAB App"
-                    />
-                    <ProjectTile
-                      title="Advanced Boosters Virtual Item Store"
-                      imgURL="/abapp.png"
-                      imgAlt="Advanced Boosters"
-                    />
-                    <ProjectTile
-                      title="Sam and Max Website"
-                      imgURL="/samandmax.png"
-                      imgAlt="Sam and Max"
-                    />
-                    <ProjectTile
-                      title="Soham Playgroup Website"
-                      imgURL="/sohamplaygroup.png"
-                      imgAlt="Soham Playgroup"
-                    />
-                  </>
-                }
-              />
+                <Switch>
+                  <Route exact path={this.props.routes.home} component={ProjectsPage}/>
+                  <Route exact path={this.props.routes.projects}  component={ProjectsPage}/>
+                  <Route exact path={this.props.routes.projectsSAB}  component={projectsSABPage}/>
+                  <Route exact path={this.props.routes.projectsAB}  component={projectsABPage}/>
+                  <Route exact path={this.props.routes.projectsSamAndMax}  component={projectsSamAndMaxPage}/>
+                  <Route exact path={this.props.routes.projectsSPG}  component={ProjectsSPGPage}/>
+                </Switch>
             </div>
           </Col>
         </Row>
+              </Router>
       </Container>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  history: state.site.history,
+  routes: state.site.routes,
+});
+
+export default connect(mapStateToProps, { setPageOpacity })(App);

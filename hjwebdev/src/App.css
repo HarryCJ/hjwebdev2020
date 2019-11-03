@@ -150,6 +150,15 @@ body {
   /*color: white;*/
 }
 
+a .back-arrow {
+  transition: transform 0.4s;
+}
+
+a:hover .back-arrow {
+
+  transform: scale(1.1)
+}
+
 .top-padding {
   width: 100%;
   padding-top: 10vw;
@@ -162,3 +171,28 @@ body {
   color: white;
   text-shadow: none;
 }*/
+
+.page {
+  min-height: 400px;
+  display: flex;
+  opacity: 0;
+  transition: opacity 250ms;
+}
+
+.page a:not(.project-tile) {
+  text-align: left;
+  font-size: 20px;
+  transition: none;
+}
+
+.page a:not(.project-tile):hover {
+  color: white;
+  text-decoration: underline;
+  text-shadow: none;
+}
+
+.back-arrow {
+  width: 41px;
+  height: 30px;
+  margin-left: 15px;
+}

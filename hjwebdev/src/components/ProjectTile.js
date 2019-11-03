@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
 // import { Container, Table, Row, Col, Navbar, Breadcrumb, Dropdown, DropdownButton, Form, Alert, Spinner } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import DelayLink from './DelayLink.js'
+import { createBrowserHistory } from 'history';
+import { connect } from 'react-redux'
+import { setPageOpacity } from '../redux/actions/siteActions'
 
 class ProjectTile extends Component {
 
   render(){
     return (
-      <a href="#" className="col-sm-3 project-tile">
+      <DelayLink delay={250} to={this.props.projectURL} history={this.props.history} onDelayStart={() => this.props.setPageOpacity(0)} className="col-sm-3 project-tile">
         <img src={this.props.imgURL} className="w-100" alt={this.props.imgAlt} />
         <h3 className="mt-2 mb-0">{this.props.title}</h3>
-      </a>
+      </DelayLink>
     );
   }
 }
 
-export default ProjectTile;
+const mapStateToProps = state => ({
+  history: state.site.history,
+});
+
+export default connect(mapStateToProps, { setPageOpacity })(ProjectTile);
