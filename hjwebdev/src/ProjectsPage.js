@@ -15,7 +15,8 @@ import { setPageOpacity } from './redux/actions/siteActions'
 class ProjectsPage extends Component {
 
   componentDidMount(){
-      setTimeout(()=>this.props.setPageOpacity(1), 100)
+      setTimeout(()=>this.props.setPageOpacity(1, 0), 10)
+      // setTimeout(()=>this.props.setPageOpacity(1, 0), 10)
   }
 
   render(){

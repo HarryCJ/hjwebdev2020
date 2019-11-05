@@ -1,4 +1,4 @@
-// import { LOGIN, LOGOUT, LOGIN_ERROR, SET_CURRENT_ID } from '../actions/types'
+import { SET_PAGE_OPACITY } from '../actions/types'
 
 import { createBrowserHistory } from 'history';
 const history = createBrowserHistory()
@@ -13,11 +13,19 @@ const initialState = {
 	  projectsSamAndMax: "/projects/samandmax",
 	  projectsSPG: "/projects/sohamplaygroup",
 	},
+	page_opacity: 1,
+	page_left: 0,
 }
 
 export default function(state = initialState, action) {
 	// console.log("action.payload", action.payload)
 	switch(action.type) {
+		case SET_PAGE_OPACITY:
+			return {
+				...state,
+				page_opacity: action.page_opacity,
+				page_left:action.page_left,
+			}
 		// case SET_CURRENT_ID:
 		// 	return {
 		// 		...state,

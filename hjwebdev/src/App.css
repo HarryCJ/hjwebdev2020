@@ -132,7 +132,8 @@ body {
   display: inline-block;
   vertical-align: top;
   transform: scale(1);
-  transition: transform 0.4s;
+  /*transition: transform 0.1s;*/
+  /*transition-delay: 0s;*/
   /*width: 300px;
   padding: 0px 15px;*/
   margin-bottom: 20px;
@@ -156,7 +157,7 @@ a .back-arrow {
 
 a:hover .back-arrow {
 
-  transform: scale(1.1)
+  transform: scale(1.05) translateX(-5px);
 }
 
 .top-padding {
@@ -176,8 +177,18 @@ a:hover .back-arrow {
   min-height: 400px;
   display: flex;
   opacity: 0;
-  transition: opacity 250ms;
+  transition: opacity 200ms, transform 200ms, left 200ms;
+  /*transition-delay: transform 50ms;*/
+  position: relative;
+
+  position: absolute;
+  transform: translateX(-25px);
 }
+
+.page.from-left {
+  transform: translateX(25px);
+}
+
 
 .page a:not(.project-tile) {
   text-align: left;
@@ -191,8 +202,30 @@ a:hover .back-arrow {
   text-shadow: none;
 }
 
+.back-button-link {
+  height: 30px;
+  position: absolute;
+    right: 0px;
+    top: -10px;
+}
+
 .back-arrow {
   width: 41px;
   height: 30px;
   margin-left: 15px;
+}
+
+.tech-logo {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  text-align: center;
+  padding: 6px 2px;
+  border-radius: 50px;
+  display: inline-block;
+}
+
+.tech-logo img {
+  max-width: 100%;
+  max-height: 100%;
 }
