@@ -137,6 +137,7 @@ body {
   /*width: 300px;
   padding: 0px 15px;*/
   margin-bottom: 20px;
+  transition: 0.1s;
 }
 
 .project-tile h3 {
@@ -147,7 +148,7 @@ body {
 }
 
 .project-tile:hover {
-  transform: scale(1.025)
+  transform: scale(1.015)
   /*color: white;*/
 }
 

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "animejs": "^3.1.0",
+    "copyfiles": "^2.2.0",
     "localforage": "^1.7.3",
     "react": "^16.11.0",
     "react-bootstrap": "^1.0.0-beta.14",
@@ -18,9 +19,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build": "react-scripts build && npm run copy-files",
+    "copy-files": "copyfiles -f 'public/*' '../.'"
   },
   "eslintConfig": {
     "extends": "react-app"
