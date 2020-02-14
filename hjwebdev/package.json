@@ -22,7 +22,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build": "react-scripts build && npm run copy-files",
-    "copy-files": "copyfiles -f 'public/*' '../.'"
+    "copy-files": "copyfiles -f 'build/*' '../.'"
   },
   "eslintConfig": {
     "extends": "react-app"
