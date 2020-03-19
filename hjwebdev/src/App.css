@@ -124,7 +124,15 @@ a.active {
   /*padding: 15px;*/
 }
 
+.nav-links > a {
+  transition: color 0.5s;
+}
+
 body {
+  /*opacity: 0;*/
+}
+
+.defaultOpaque {
   opacity: 0;
 }
 

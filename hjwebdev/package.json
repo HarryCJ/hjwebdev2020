@@ -19,10 +19,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "test": "react-scripts test",
+    "test": "cd .. && dir",
     "eject": "react-scripts eject",
     "build": "react-scripts build && npm run copy-files",
-    "copy-files": "copyfiles -f 'build/*' '../.' && copyfiles -f 'build/static/css/*' '../static/css/' && copyfiles -f 'build/static/js/*' '../static/js/'"
+    "copy-files": "copyfiles -V 'build/*' '../.' && copyfiles -V 'build/static/css/*/' '../static/css' && copyfiles -V 'build/static/js/*' '../static/js/'"
   },
   "eslintConfig": {
     "extends": "react-app"

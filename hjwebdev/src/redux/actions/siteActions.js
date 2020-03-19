@@ -1,4 +1,4 @@
-import { SET_PAGE_OPACITY } from './types'
+import { SET_PAGE_OPACITY, SET_PAGE_CONTENT_SELECTOR } from './types'
 // import { api_url } from '../../api_url'
 // import anime from 'animejs';
 
@@ -22,4 +22,12 @@ export const setPageOpacity = (value, offsetX) => dispatch => {
       //   delay: 250,
       //   easing: 'easeInOutQuad',
       // });
+}
+
+export const setPageContentSelector = (value) => dispatch => {
+      console.log("setPageContentSelector", value)
+        dispatch({
+          type: SET_PAGE_CONTENT_SELECTOR,
+          payload: value,
+        })
 }

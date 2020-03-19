@@ -10,13 +10,28 @@ import { Route, Switch, Link } from 'react-router-dom'
 import { createBrowserHistory } from 'history';
 import DelayLink from './components/DelayLink.js'
 import { connect } from 'react-redux'
-import { setPageOpacity } from './redux/actions/siteActions'
+import { setPageOpacity, setPageContentSelector } from './redux/actions/siteActions'
 
 class ProjectsPage extends Component {
 
   componentDidMount(){
-      setTimeout(()=>this.props.setPageOpacity(1, 0), 10)
       // setTimeout(()=>this.props.setPageOpacity(1, 0), 10)
+
+      const projects = [
+        '.page > .project-tile:nth-child(1)',
+        '.page > .project-tile:nth-child(2)',
+        '.page > .project-tile:nth-child(3)',
+        '.page > .project-tile:nth-child(4)',
+      ]
+
+      const projectPageSelector = [
+        projects[0],
+        projects[1],
+        projects[2],
+        projects[3],
+      ].join(', ')
+
+      this.props.setPageContentSelector(projectPageSelector)
   }
 
   render(){
@@ -60,4 +75,4 @@ const mapStateToProps = state => ({
   routes: state.site.routes,
 });
 
-export default connect(mapStateToProps, { setPageOpacity })(ProjectsPage);
+export default connect(mapStateToProps, { setPageOpacity, setPageContentSelector })(ProjectsPage);

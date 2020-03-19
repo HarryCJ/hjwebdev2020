@@ -1,4 +1,4 @@
-import { SET_PAGE_OPACITY } from '../actions/types'
+import { SET_PAGE_OPACITY, SET_PAGE_CONTENT_SELECTOR } from '../actions/types'
 
 import { createBrowserHistory } from 'history';
 const history = createBrowserHistory()
@@ -15,6 +15,7 @@ const initialState = {
 	},
 	page_opacity: 1,
 	page_left: 0,
+	pageContentSelector: '', 
 }
 
 export default function(state = initialState, action) {
@@ -25,6 +26,11 @@ export default function(state = initialState, action) {
 				...state,
 				page_opacity: action.page_opacity,
 				page_left:action.page_left,
+			}
+		case SET_PAGE_CONTENT_SELECTOR:
+			return {
+				...state,
+				pageContentSelector: action.payload,
 			}
 		// case SET_CURRENT_ID:
 		// 	return {
