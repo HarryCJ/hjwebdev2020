@@ -72,7 +72,7 @@ export default class DelayLink extends React.Component {
     delete props.onDelayEnd;
 
     return (
-      <Link {...props} onClick={this.handleClick} />
+      <a {...props} onClick={this.handleClick} />
     );
   }
 }

@@ -58,6 +58,7 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
+      currentPage: null,
     }
     this.selectors = {
       logo: '.App-logo',
@@ -71,9 +72,18 @@ class App extends Component {
       subTitle: '.rightSide > h2',
       // pageContent: '.rightSide > div',
     }
+    this.paths = [
+      {name: this.props.routes.home, value: <ProjectsPage/>},
+      {name: this.props.routes.projects, value: <ProjectsPage/>},
+      // {name: this.props.routes.projectsSAB, value: <ProjectsPage/>},
+      // {name: this.props.routes.projectsAB, value: <ProjectsPage/>},
+      // {name: this.props.routes.projectsSamAndMax, value: <ProjectsPage/>},
+      {name: this.props.routes.projectsSPG, value: <ProjectsSPGPage/>},
+      // {name: this.props.routes.about, value: <ProjectsPage/>},
+    ]
   }
 
-  AnimatePageContent = (pageContent) => {
+  AnimatePageContent = (pageContent, delay) => {
     // anime({
     //   targets: pageContent,
     //   keyframes: [
@@ -86,7 +96,7 @@ class App extends Component {
     anime({
       targets: pageContent,
       opacity: [
-        {value: 0, duration: 1400},
+        {value: 0, duration: delay},
         {value: 1, easing: 'easeInOutQuad', duration: 500},
       ],
       delay: anime.stagger(100, {grid: [5, 2], from: 'first', easing: 'easeInSine'}),
@@ -113,6 +123,21 @@ class App extends Component {
       // ]
       // const subTitle = document.querySelector('.rightSide > h2')
       // const pageContent = document.querySelector('.rightSide > div')
+      this.setState({
+        currentPage: this.paths.find(path => path.name === window.location.hash)
+      })
+
+      const unlisten = this.props.history.listen((location, action) => {
+        // location is an object like window.location
+        // console.log(action, location.pathname, location.state);
+        console.log(window.location.hash, this.paths, this.paths.find(path => path.name === window.location.hash))
+        this.setState({
+          currentPage: this.paths.find(path => path.name === window.location.hash)
+        }, () => {
+          const {pageContentSelector} = this.props
+          this.AnimatePageContent(pageContentSelector, 0)
+        })
+      });
 
       const {
         logo, title,
@@ -144,12 +169,15 @@ class App extends Component {
 
       const { pageContentSelector } = nextProps
       if (pageContentSelector) {
-        this.AnimatePageContent(pageContentSelector)
+        this.AnimatePageContent(pageContentSelector, 1400)
       }
   }
 
+
+
   render() {
     console.log("render", this.state)
+    const {currentPage} = this.state
     return (
       <Container>
               <Router history={this.props.history}>
@@ -159,7 +187,7 @@ class App extends Component {
             <img src="/logofinal.png" className="defaultOpaque App-logo" alt="logo" />
             <div className="nav-links">
               <Link className="defaultOpaque active" to={this.props.routes.projects}>Projects</Link>
-              <a className="defaultOpaque" href="#">About</a>
+              <Link className="defaultOpaque" to={this.props.routes.about}>About</Link>
               <a className="defaultOpaque" href="#">Services</a>
               <a className="defaultOpaque" href="#">Contact</a>
             </div>
@@ -168,15 +196,20 @@ class App extends Component {
             <h1 className="defaultOpaque">Harry Johnson Web Development</h1>
             <h2 className="defaultOpaque">Full-stack developer</h2>
             <div className="mt-3 mx-n3">
-                <Switch>
-                  <Route exact path={this.props.routes.home} component={ProjectsPage}/>
-                  <Route exact path={this.props.routes.projects}  component={ProjectsPage}/>
-                  <Route exact path={this.props.routes.projectsSAB}  component={projectsSABPage}/>
-                  <Route exact path={this.props.routes.projectsAB}  component={projectsABPage}/>
-                  <Route exact path={this.props.routes.projectsSamAndMax}  component={projectsSamAndMaxPage}/>
-                  <Route exact path={this.props.routes.projectsSPG}  component={ProjectsSPGPage}/>
-                </Switch>
-            </div>
+              {
+                
+                (currentPage && currentPage.value) || <ProjectsPage/>
+              }
+
+                {/**<Switch>
+                                              <Route exact path={this.props.routes.home} component={ProjectsPage}/>
+                                              <Route exact path={this.props.routes.projects}  component={ProjectsPage}/>
+                                              <Route exact path={this.props.routes.projectsSAB}  component={projectsSABPage}/>
+                                              <Route exact path={this.props.routes.projectsAB}  component={projectsABPage}/>
+                                              <Route exact path={this.props.routes.projectsSamAndMax}  component={projectsSamAndMaxPage}/>
+                                              <Route exact path={this.props.routes.projectsSPG}  component={ProjectsSPGPage}/>
+                                            </Switch>
+                            **/}            </div>
           </Col>
         </Row>
               </Router>

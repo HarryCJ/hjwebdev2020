@@ -18,7 +18,6 @@ class BackPageButton extends Component {
         delay={250} 
         to={this.props.to} 
         history={this.props.history}
-        onDelayStart={() => this.props.setPageOpacity(0, 25)}
         className="back-button-link"
       ><img src="/back-arrow.png" className="back-arrow" /></DelayLink>)
   }
