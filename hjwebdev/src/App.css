@@ -117,6 +117,17 @@ a:hover {
 a.active {
   color: white;
   text-shadow: none;
+  animation-name: activeIntro;
+  /*animation-delay: 0.2s;*/
+  animation-duration: 0.3s;
+}
+
+@keyframes activeIntro {
+  0% {margin-right: 0px;}
+  25% {margin-right: 3px;}
+  50% {margin-right: 0px;}
+  75% {margin-right: 2px;}
+  100% {margin-right: 0px;}
 }
 
 .nav-links {
