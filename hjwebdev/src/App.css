@@ -51,7 +51,7 @@ body {
 
 .container {
 
-    min-height: 100vh;
+    min-height: 101vh;
     display: flex;
     align-items: center;
 }
@@ -167,8 +167,8 @@ body {
 }
 
 .project-tile:hover {
-  transform: scale(1.015)
-  /*color: white;*/
+  transform: scale(1.015);
+  cursor: pointer;
 }
 
 a .back-arrow {
@@ -194,7 +194,7 @@ a:hover .back-arrow {
 }*/
 
 .page {
-  min-height: 400px;
+  /*min-height: 400px;*/
   display: flex;
   opacity: 0;
   transition: opacity 200ms, transform 200ms, left 200ms;

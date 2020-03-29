@@ -108,6 +108,9 @@ class App extends Component {
       ],
       delay: anime.stagger(100, {easing: 'easeInSine'}),
     })
+    setTimeout(() => {
+      document.querySelectorAll(pageContent).forEach(e => e.style.transform = '')
+    }, delay+1000)
   }
 
   componentDidMount(){
@@ -164,6 +167,14 @@ class App extends Component {
           {value: 1, easing: 'easeOutQuad', duration: 200},
         ],
         delay: anime.stagger(25, {start: 750}),
+      })
+
+      anime({
+        targets: '.top-padding',
+        paddingTop: '0vh',
+        duration: 1500,//anime.stagger(200),
+        easing: 'easeInOutQuad',
+        delay: 500,
       })
 
       anime({
