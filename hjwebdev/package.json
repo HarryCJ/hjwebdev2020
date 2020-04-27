@@ -22,7 +22,7 @@
     "test": "cd .. && dir",
     "eject": "react-scripts eject",
     "build": "react-scripts build && npm run copy-files",
-    "copy-files": "copyfiles -f \"build/*\" \"../.\" && copyfiles -f \"build/static/css/*\" \"../static/css\" && copyfiles -f \"build/static/js/*\" \"../static/js/\""
+    "copy-files": "copyfiles -f \"build/*\" \"../.\" && copyfiles -f \"build/static/css/*\" \"../static/css\" && copyfiles -f \"build/static/js/*\" \"../static/js/\" && copyfiles -f \"build/photoswipe/*\" \"../photoswipe/\" && copyfiles -f \"build/screenshots/sab/*\" \"../screenshots/sab/\" && copyfiles -f \"build/logos/*\" \"../logos/\""
   },
   "eslintConfig": {
     "extends": "react-app"
