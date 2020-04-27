@@ -13,6 +13,8 @@ import { connect } from 'react-redux'
 import { setPageOpacity } from './redux/actions/siteActions'
 import ProjectsSPGPage from './ProjectsSPGPage.js'
 import ProjectsPage from './ProjectsPage.js'
+import SMProjectPage from './projects/SMProjectPage.js'
+import SABProjectPage from './projects/SABProjectPage.js'
 
 class projectsSABPage extends Component {
   render(){
@@ -40,18 +42,18 @@ class projectsABPage extends Component {
   }
 }
 
-class projectsSamAndMaxPage extends Component {
-  render(){
-    return (
-      <Page
-        inner={
-          <>
-            <h2>Hello world</h2>
-          </>
-        }
-      />)
-  }
-}
+// class projectsSamAndMaxPage extends Component {
+//   render(){
+//     return (
+//       <Page
+//         inner={
+//           <>
+//             <h2>Hello world</h2>
+//           </>
+//         }
+//       />)
+//   }
+// }
 
 class App extends Component {
 
@@ -77,9 +79,9 @@ class App extends Component {
     this.paths = [
       {name: this.props.routes.home, value: <ProjectsPage/>},
       {name: this.props.routes.projects, value: <ProjectsPage/>},
-      // {name: this.props.routes.projectsSAB, value: <ProjectsPage/>},
+      {name: this.props.routes.projectsSAB, value: <SABProjectPage/>},
       // {name: this.props.routes.projectsAB, value: <ProjectsPage/>},
-      // {name: this.props.routes.projectsSamAndMax, value: <ProjectsPage/>},
+      {name: this.props.routes.projectsSamAndMax, value: <SMProjectPage/>},
       {name: this.props.routes.projectsSPG, value: <ProjectsSPGPage/>},
       // {name: this.props.routes.about, value: <ProjectsPage/>},
     ]
@@ -241,7 +243,7 @@ class App extends Component {
     return (
       <Container>
               <Router history={this.props.history}>
-        <Row>
+        <Row className="center-row pt-5">
           <div className="top-padding"></div>
           <Col sm={2} className="leftSide">
             <img src="/logofinal.png" className="App-logo" alt="logo" />

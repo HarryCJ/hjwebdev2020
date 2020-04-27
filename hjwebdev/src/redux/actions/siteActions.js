@@ -1,6 +1,19 @@
 import { SET_PAGE_OPACITY, SET_PAGE_CONTENT_SELECTOR } from './types'
 // import { api_url } from '../../api_url'
-// import anime from 'animejs';
+import anime from 'animejs';
+
+export const toggleAlignCenter = (isCenter) => dispatch => {
+  console.log("toggleAlignCenter", isCenter)
+  const centerRow = document.querySelector('.center-row')
+  let offsetTop = centerRow.offsetTop + centerRow.offsetHeight
+  // anime({
+  //     targets: '.center-row',
+  //     marginTop: offsetTop*-1,
+  //     // delay: 250,
+  //     duration: 1000,
+  //     easing: 'easeInOutQuad',
+  //   });
+}
 
 export const setPageOpacity = (value, offsetX) => dispatch => {
 	console.log("setPageOpacity", value, offsetX)

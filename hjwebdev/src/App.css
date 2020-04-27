@@ -49,13 +49,16 @@ body {
     animation: Gradient 15s ease infinite;
 }
 
-.container {
+#root > .container {
 
     min-height: 101vh;
     display: flex;
-    align-items: center;
+    /*align-items: center;*/
+    align-items: flex-start;
 }
-
+.page {
+    padding-bottom: 100px;
+}
 .row {
     width: 100%;
 }
@@ -97,6 +100,22 @@ h3 {
   /*text-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;*/
 }
 
+p {
+  color: white;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+li {
+    color: white;
+  font-size: 18px;
+}
+
+p.font-italic {
+  font-size: 18px;
+  /*opacity: 0.75;*/
+}
+
 a {
   display: block;
   text-align: right;
@@ -121,6 +140,99 @@ a.active {
   /*animation-delay: 0.2s;*/
   animation-duration: 0.3s;
 }
+
+.page h3 {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.bs-tooltip-auto[x-placement^=bottom] .arrow::before, .bs-tooltip-bottom .arrow::before {
+/*.tooltip .arrow {*/
+  border-bottom-color: white !important;
+}
+
+.tooltip-inner {
+  background-color: white;
+  color: black;
+}
+
+.logo-list {
+  margin-top: 10px;
+}
+
+
+.logo-list li {
+  list-style-type: none;
+  display: inline-block;
+  margin: 0px;
+  margin-left: 10px;
+}
+
+
+/*@media not all, not all, (-webkit-min-device-pixel-ratio: 1.1), (-webkit-min-device-pixel-ratio: 1.09375), (min-resolution: 1.1dppx), (min-resolution: 105dpi) {
+  html .pswp--svg .pswp__button,
+  html .pswp--svg .pswp__button--arrow--left:before,
+  html .pswp--svg .pswp__button--arrow--right:before {
+    background-image:url(/static/img/default-skin.svg);
+  }
+
+  html .pswp--svg .pswp__button--arrow--left,
+  html .pswp--svg .pswp__button--arrow--right {
+    background: none
+  }
+}*/
+
+ .pswp {
+    min-height: 500px;
+    position: relative;
+    margin-bottom: 15px;
+    pointer-events: none;
+}
+
+.pswp__img {
+  pointer-events: auto;
+}
+
+.pswp button {
+  pointer-events: auto;
+}
+
+ .pswp-thumbnails {
+  display: none;
+}
+
+ .pswp__button.pswp__button--close,
+ .pswp__button.pswp__button--share {
+  display: none;
+}
+
+.pswp, .pswp .pswp__container, .pswp .pswp__zoom-wrap {
+  touch-action: auto !important;
+}
+
+.pswp__bg {
+  background: transparent;
+}
+
+.pswp__top-bar {
+    /*background-color: black !important;*/
+    background-color: transparent !important;
+    opacity: 1 !important;
+}
+
+.pswp__caption {
+    background-color: transparent !important;
+    opacity: 1 !important;
+}
+
+.pswp__caption__center {
+  text-align: center;
+}
+
+.pswp__button--arrow--left:before, .pswp__button--arrow--right:before {
+    background-color: transparent !important;
+    opacity: 1 !important;
+}
+
 
 @keyframes activeIntro {
   0% {margin-right: 0px;}
