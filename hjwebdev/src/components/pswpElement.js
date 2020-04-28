@@ -14,13 +14,20 @@ const pswpElement =
                 <div className="pswp__top-bar">
                     <div className="pswp__counter"></div>
 
-                    <button className="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                    {/**<button className="pswp__button pswp__button--close" title="Close (Esc)">
+                        <i class="fas fa-compress"></i>
+                    </button>**/}
 
-                    <button className="pswp__button pswp__button--share" title="Share"></button>
+                    <button className="pswp__button pswp__button--fs" title="Toggle fullscreen">
+                        <i class="fas fa-expand"></i>
+                        <i class="fas fa-compress"></i>
+                    </button>
 
-                    <button className="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                    <button className="pswp__button pswp__button--zoom" title="Zoom in/out">
+                        <i class="fas fa-search-plus"></i>
+                        <i class="fas fa-search-minus"></i>
+                    </button>
 
-                    <button className="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
                     <div className="pswp__preloader">
                         <div className="pswp__preloader__icn">
                           <div className="pswp__preloader__cut">
@@ -35,9 +42,11 @@ const pswpElement =
                 </div>
 
                 <button className="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                    <i class="fas fa-arrow-left"></i>
                 </button>
 
                 <button className="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                    <i class="fas fa-arrow-right"></i>
                 </button>
 
                 <div className="pswp__caption">

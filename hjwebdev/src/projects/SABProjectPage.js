@@ -95,9 +95,9 @@ class SABProjectPage extends Component {
         _offset.x += r.left;
         _offset.y += r.top;
     });
-    gallery.listen('preventDragEvent', function(e, isDown, preventObj) {
-        preventObj.prevent = false;
-    });
+    // gallery.listen('preventDragEvent', function(e, isDown, preventObj) {
+    //     preventObj.prevent = false;
+    // });
     /*eslint-enable no-undef*/
     gallery.init();
   }
@@ -113,14 +113,9 @@ class SABProjectPage extends Component {
         className="from-left ml-3"
         inner={
           <Row>
-            <Col sm={10}>
-              <h3 className="">SAB Property Management App</h3>
-              <p className="font-italic">Saint Andrews Bureau is a lettings, sales, estate management and investment company with offices located in London, Cambridgeshire and Hertfordshire.</p>
-            </Col>
             <Col sm={2}>
               <OverlayTrigger
                 placement="bottom"
-                delay={{ show: 50, hide: 50 }}
                 overlay={
                   <Tooltip id="button-tooltip">
                     <b>Visit website</b>
@@ -131,6 +126,10 @@ class SABProjectPage extends Component {
                   <img src="/sab-border-3.png" className="w-100" />
                 </a>
               </OverlayTrigger>
+            </Col>
+            <Col sm={10}>
+              <h3 className="">SAB Property Management App</h3>
+              <p className="font-italic">Saint Andrews Bureau is a lettings, sales, estate management and investment company with offices located in London, Cambridgeshire and Hertfordshire.</p>
             </Col>
             <Col sm={12} className="mt-3">
               {pswpElement}
@@ -152,7 +151,6 @@ class SABProjectPage extends Component {
               <ul className="logo-list">
                 <OverlayTrigger
                   placement="bottom"
-                  delay={{ show: 50, hide: 50 }}
                   overlay={
                     <Tooltip id="button-tooltip">
                       <b>ReactJS</b>
@@ -167,7 +165,6 @@ class SABProjectPage extends Component {
                 </OverlayTrigger>
                 <OverlayTrigger
                   placement="bottom"
-                  delay={{ show: 50, hide: 50 }}
                   overlay={
                     <Tooltip id="button-tooltip">
                       <b>Django</b>
@@ -182,7 +179,6 @@ class SABProjectPage extends Component {
                 </OverlayTrigger>
                 <OverlayTrigger
                   placement="bottom"
-                  delay={{ show: 50, hide: 50 }}
                   overlay={
                     <Tooltip id="button-tooltip">
                       <b>Bootstrap</b>
@@ -197,7 +193,6 @@ class SABProjectPage extends Component {
                 </OverlayTrigger>
                 <OverlayTrigger
                   placement="bottom"
-                  delay={{ show: 50, hide: 50 }}
                   overlay={
                     <Tooltip id="button-tooltip">
                       <b>MySQL</b>

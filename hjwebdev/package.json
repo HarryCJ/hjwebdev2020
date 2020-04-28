@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "animejs": "^3.1.0",
     "copyfiles": "^2.2.0",
     "localforage": "^1.7.3",
@@ -22,7 +23,7 @@
     "test": "cd .. && dir",
     "eject": "react-scripts eject",
     "build": "react-scripts build && npm run copy-files",
-    "copy-files": "copyfiles -f \"build/*\" \"../.\" && copyfiles -f \"build/static/css/*\" \"../static/css\" && copyfiles -f \"build/static/js/*\" \"../static/js/\" && copyfiles -f \"build/photoswipe/*\" \"../photoswipe/\" && copyfiles -f \"build/photoswipe/default-skin/*\" \"../photoswipe/default-skin/\" && copyfiles -f \"build/screenshots/sab/*\" \"../screenshots/sab/\" && copyfiles -f \"build/logos/*\" \"../logos/\""
+    "copy-files": "copyfiles -f \"build/*\" \"../.\" && copyfiles -f \"build/static/css/*\" \"../static/css\" && copyfiles -f \"build/static/js/*\" \"../static/js/\" && copyfiles -f \"build/photoswipe/*\" \"../photoswipe/\" && copyfiles -f \"build/photoswipe/default-skin/*\" \"../photoswipe/default-skin/\" && copyfiles -f \"build/screenshots/sab/*\" \"../screenshots/sab/\" && copyfiles -f \"build/logos/*\" \"../svgs/\" && copyfiles -f \"build/svgs/*\" \"../svgs/\""
   },
   "eslintConfig": {
     "extends": "react-app"

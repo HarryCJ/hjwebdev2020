@@ -247,7 +247,7 @@ class App extends Component {
           <div className="top-padding"></div>
           <Col sm={2} className="leftSide">
             <img src="/logofinal.png" className="App-logo" alt="logo" />
-            <div className="nav-links">
+            <div className="nav-links mt-5">
               <Link className="defaultOpaque" onClick={this.setActive} to={this.props.routes.projects}>Projects</Link>
               <Link className="defaultOpaque" onClick={this.setActive} to={this.props.routes.about}>About</Link>
               <a className="defaultOpaque" onClick={this.setActive} href="#">Services</a>
@@ -257,7 +257,7 @@ class App extends Component {
           <Col sm={10} className="rightSide">
             <h1 className="">{this.textWrapper('Harry Johnson Web Development', 'defaultOpaque letter')}</h1>
             <h2 className="">{this.textWrapper('Full-stack developer', 'defaultOpaque letter')}</h2>
-            <div className="mt-3 mx-n3">
+            <div className="mt-5 mx-n3">
               {
                 
                 (currentPage && currentPage.value) || <ProjectsPage/>
