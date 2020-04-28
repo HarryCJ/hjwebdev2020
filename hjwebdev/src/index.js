@@ -6,7 +6,7 @@ import store from "./redux/store";
 
 // import './css/xxs.css';
 import './index.css';
-import './css/fontawesome.css';
+// import './css/fontawesome.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
