@@ -10,8 +10,8 @@ class Page extends Component {
     <div 
     	className={this.props.className+" page"} 
     	style={{
-    		opacity: this.props.page_opacity,
-    		transform: `translateX(${this.props.page_left}px)`,
+    		// opacity: this.props.page_opacity,
+    		// transform: `translateX(${this.props.page_left}px)`,
     	}}
     >{this.props.inner}</div>);
   }

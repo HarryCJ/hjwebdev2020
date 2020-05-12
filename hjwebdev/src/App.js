@@ -15,7 +15,7 @@ import ProjectsSPGPage from './ProjectsSPGPage.js'
 import ProjectsPage from './ProjectsPage.js'
 import SMProjectPage from './projects/SMProjectPage.js'
 import SABProjectPage from './projects/SABProjectPage.js'
-
+import ABProjectPage from './projects/ABProjectPage.js'
 class projectsSABPage extends Component {
   render(){
     return (
@@ -64,10 +64,10 @@ class App extends Component {
     }
     this.selectors = {
       logo: '.App-logo',
-      title: '.rightSide > h1',
-      titleLetters: '.rightSide > h1 .letter',
-      subTitle: '.rightSide > h2',
-      subTitleLetters: '.rightSide > h2 .letter',
+      title: 'h1.app-title',
+      titleLetters: 'h1.app-title .letter',
+      subTitle: 'h2.app-subtitle',
+      subTitleLetters: 'h2.app-subtitle .letter',
       links: [
         '.leftSide > .nav-links > a:nth-child(1)',
         '.leftSide > .nav-links > a:nth-child(2)',
@@ -80,7 +80,7 @@ class App extends Component {
       {name: this.props.routes.home, value: <ProjectsPage/>},
       {name: this.props.routes.projects, value: <ProjectsPage/>},
       {name: this.props.routes.projectsSAB, value: <SABProjectPage/>},
-      // {name: this.props.routes.projectsAB, value: <ProjectsPage/>},
+      {name: this.props.routes.projectsAB, value: <ABProjectPage/>},
       {name: this.props.routes.projectsSamAndMax, value: <SMProjectPage/>},
       {name: this.props.routes.projectsSPG, value: <ProjectsSPGPage/>},
       // {name: this.props.routes.about, value: <ProjectsPage/>},
@@ -101,18 +101,18 @@ class App extends Component {
       targets: pageContent,
       opacity: [
         {value: 0, duration: delay},
-        {value: 1, easing: 'easeInOutQuad', duration: 500},
+        {value: 1, easing: 'easeInOutQuad', duration: 750},
       ],
-      scale: [
-        {value: 1, easing: 'easeInQuad', duration: delay},
-        {value: 1.025, easing: 'easeInQuad', duration: 200},
-        {value: 1, easing: 'easeOutQuad', duration: 200},
-      ],
-      delay: anime.stagger(100, {easing: 'easeInSine'}),
+      // scale: [
+      //   {value: 1, easing: 'easeInQuad', duration: delay},
+      //   {value: 1.025, easing: 'easeInQuad', duration: 200},
+      //   {value: 1, easing: 'easeOutQuad', duration: 200},
+      // ],
+      delay: anime.stagger(200, {easing: 'easeInSine'}),
     })
-    setTimeout(() => {
-      document.querySelectorAll(pageContent).forEach(e => e.style.transform = '')
-    }, delay+1000)
+    // setTimeout(() => {
+    //   document.querySelectorAll(pageContent).forEach(e => e.style.transform = '')
+    // }, delay)
   }
 
   componentDidMount(){
@@ -171,13 +171,19 @@ class App extends Component {
         delay: anime.stagger(25, {start: 750}),
       })
 
-      anime({
-        targets: '.top-padding',
-        paddingTop: '0vh',
-        duration: 1500,//anime.stagger(200),
-        easing: 'easeInOutQuad',
-        delay: 500,
-      })
+      console.log("currentPage", window.location.hash)
+
+      if (window.location.hash === ''){
+        anime({
+          targets: '.top-padding',
+          paddingTop: '0vh',
+          duration: 1500,//anime.stagger(200),
+          easing: 'easeInOutQuad',
+          delay: 500,
+        })
+      } else {
+        document.querySelector('.top-padding').remove()
+      }
 
       anime({
         targets: [
@@ -212,7 +218,7 @@ class App extends Component {
 
       const { pageContentSelector } = nextProps
       if (pageContentSelector) {
-        this.AnimatePageContent(pageContentSelector, 1250)
+        this.AnimatePageContent(pageContentSelector, 1000)
       }
   }
 
@@ -240,24 +246,39 @@ class App extends Component {
   render() {
     console.log("render", this.state)
     const {currentPage} = this.state
+
+    const isMobile = window.innerWidth <= 575
+    const isFluid = window.innerWidth <= 991
+    const appTitle = (isMobile) => <h1 className={`app-title ${isMobile ? 'd-block d-sm-none' : 'd-none d-sm-block'}`}>{this.textWrapper('Harry Johnson Web Development', 'defaultOpaque letter')}</h1>
+    const appSubtitle = (isMobile) => <h2 className={`app-subtitle ${isMobile ? 'd-block d-sm-none' : 'd-none d-sm-block'}`}>{this.textWrapper('Freelance full-stack developer', 'defaultOpaque letter')}</h2>
+    const navLinks = 
+      <div className="nav-links">
+        <Link className="defaultOpaque" onClick={this.setActive} to={this.props.routes.projects}>Projects</Link>
+        <Link className="defaultOpaque" onClick={this.setActive} to={this.props.routes.about}>About</Link>
+        <a className="defaultOpaque" onClick={this.setActive} href="#">Services</a>
+        <a className="defaultOpaque" onClick={this.setActive} href="#">Contact</a>
+      </div>
+
     return (
-      <Container>
+      <div className={`${isFluid ? 'container-fluid' : 'container'} ${isMobile && 'mobile'}`}>
               <Router history={this.props.history}>
         <Row className="center-row pt-5">
           <div className="top-padding"></div>
-          <Col sm={2} className="leftSide">
+          <Col sm={4} md={2} className="leftSide">
+            {isMobile && navLinks}
             <img src="/logofinal.png" className="App-logo" alt="logo" />
-            <div className="nav-links mt-5">
-              <Link className="defaultOpaque" onClick={this.setActive} to={this.props.routes.projects}>Projects</Link>
-              <Link className="defaultOpaque" onClick={this.setActive} to={this.props.routes.about}>About</Link>
-              <a className="defaultOpaque" onClick={this.setActive} href="#">Services</a>
-              <a className="defaultOpaque" onClick={this.setActive} href="#">Contact</a>
-            </div>
+            {appTitle(true)}
+            {appSubtitle(true)}
           </Col>
-          <Col sm={10} className="rightSide">
-            <h1 className="">{this.textWrapper('Harry Johnson Web Development', 'defaultOpaque letter')}</h1>
-            <h2 className="">{this.textWrapper('Full-stack developer', 'defaultOpaque letter')}</h2>
-            <div className="mt-5 mx-n3">
+          <Col sm={8} md={10} className="rightSide">
+            {appTitle(false)}
+            {appSubtitle(false)}
+          </Col>
+          <Col sm={4} md={2} className="leftSide">
+            {!isMobile && navLinks}
+          </Col>
+          <Col sm={8} md={10} className="rightSide">
+            <div className="mt-3">
               {
                 
                 (currentPage && currentPage.value) || <ProjectsPage/>
@@ -275,7 +296,7 @@ class App extends Component {
           </Col>
         </Row>
               </Router>
-      </Container>
+      </div>
     );
   }
 }

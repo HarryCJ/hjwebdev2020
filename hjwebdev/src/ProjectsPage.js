@@ -28,7 +28,6 @@ class ProjectsPage extends Component {
         projects[0],
         projects[1],
         projects[2],
-        projects[3],
       ].join(', ')
 
       this.props.setPageContentSelector(projectPageSelector)
@@ -38,6 +37,7 @@ class ProjectsPage extends Component {
       // this.props.setPageOpacity(1)
     return (
       <Page
+        className="row"
         inner={
           <>
             <ProjectTile
@@ -57,12 +57,6 @@ class ProjectsPage extends Component {
               projectURL={this.props.routes.projectsSamAndMax}
               imgURL="/samandmax.png"
               imgAlt="Sam and Max"
-            />
-            <ProjectTile
-              title="Soham Playgroup Website"
-              projectURL={this.props.routes.projectsSPG}
-              imgURL="/sohamplaygroup.png"
-              imgAlt="Soham Playgroup"
             />
           </>
         }

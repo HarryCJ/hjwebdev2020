@@ -14,7 +14,7 @@ class ProjectTile extends Component {
       	delay={250} 
       	to={this.props.projectURL} 
       	history={this.props.history} 
-      	className="defaultOpaque col-sm-3 project-tile"
+      	className="defaultOpaque col-md-3 col-6 project-tile"
       >
         <img src={this.props.imgURL} className="w-100" alt={this.props.imgAlt} />
         <h3 className="mt-2 mb-0">{this.props.title}</h3>
