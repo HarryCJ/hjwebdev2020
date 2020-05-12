@@ -18,10 +18,8 @@ class SABProjectPage extends ProjectPageTemplate {
       {src: "/screenshots/sab/sab (3).png", title: "Address edit form", description: "", w:2405, h:1454},
       {src: "/screenshots/sab/sab (4).png", title: "Routine check management", description: "", w:2405, h:1454},
       {src: "/screenshots/sab/sab (5).png", title: "Routine check edit form", description: "", w:2405, h:1454},
-      // {src: "/screenshots/sab/sab (6).png", title: "t", description: "", w:2405, h:1454},
       {src: "/screenshots/sab/sab (7).png", title: "Routine check signature", description: "", w:2405, h:1454},
       {src: "/screenshots/sab/sab (8).png", title: "Inventory edit form", description: "", w:2405, h:1454},
-      // {src: "/screenshots/sab/sab (9).png", title: "t", description: "", w:2405, h:1454},
       {src: "/screenshots/sab/sab (10).png", title: "User edit form", description: "", w:2405, h:1454},
       {src: "/screenshots/sab/sab (11).png", title: "Inventory settings", description: "", w:2405, h:1454},
     ]
