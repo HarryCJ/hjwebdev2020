@@ -9,14 +9,32 @@ const initialState = {
 	  home: "#",
 	  projects: "#projects",
 	  projectsSAB: "#projects-sab",
-	  projectsAB: "#projects-ab",
 	  projectsSamAndMax: "#projects-samandmax",
-	  projectsSPG: "#projects-sohamplaygroup",
+	  projectsAB: "#projects-ab",
 	  about: "#about",
+	  services: "#services",
+	  contact: "#contact",
 	},
 	page_opacity: 1,
 	page_left: 0,
 	pageContentSelector: '', 
+	projects: {
+		projectsSAB: {
+			title: "SAB Property Management App",
+			imgURL: "/sabapp.png",
+			imgAlt: "SAB App",
+		},
+		projectsSamAndMax: {
+			title: "Sam and Max Website",
+			imgURL: "/samandmax.png",
+			imgAlt: "Sam and Max",
+		},
+		projectsAB: {
+			title: "Advanced Boosters Online Store",
+			imgURL: "/abapp.png",
+			imgAlt: "Advanced Boosters",
+		},     
+	}
 }
 
 export default function(state = initialState, action) {

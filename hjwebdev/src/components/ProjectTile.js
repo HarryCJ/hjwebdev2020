@@ -14,8 +14,9 @@ class ProjectTile extends Component {
       	delay={250} 
       	to={this.props.projectURL} 
       	history={this.props.history} 
-      	className="defaultOpaque col-md-3 col-6 project-tile"
+      	className={`${this.props.defaultOpaque ? 'defaultOpaque' : ''} ${this.props.className ? this.props.className : ''} project-tile`}
       >
+        {this.props.heading && this.props.heading}
         <img src={this.props.imgURL} className="w-100" alt={this.props.imgAlt} />
         <h3 className="mt-2 mb-0">{this.props.title}</h3>
       </DelayLink>

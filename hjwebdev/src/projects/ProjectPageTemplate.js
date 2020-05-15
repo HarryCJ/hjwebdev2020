@@ -18,25 +18,43 @@ class ProjectPageTemplate extends Component {
 
   constructor(props){
     super(props)
-
-    this.pageSelector = ''
-    this.photoswipeItems = [
-    ]
-    this.projectWebsite = ''
-    this.projectLogoURL = ''
-    this.projectTitle = ''
-    this.projectSubtitle = ''
-    this.projectFeatures = [
-    ]
-    this.projectMadeWith = [
-    ]
+    this.state = {
+      previousProjectRoute: null,
+      previousProject: null,
+      nextProjectRoute: null,
+      nextProject: null,
+    }
   }
 
   componentDidMount(){
-      this.props.setPageContentSelector(this.pageSelector)
+    this.props.setPageContentSelector(['.page', '.page .made-with-col'].join(', '))
+    console.log("this.props.routes", this.props.routes)
+    let isNextProjectRoute = false
+    const route = window.location.hash
+    const routesKeys = Object.keys(this.props.routes)
+    let newState = {
+      previousProject: null,
+    }
+    routesKeys.some((key, index) => {
+      // Check for previous project
+      if (routesKeys[index].startsWith('projects') &&
+        routesKeys.length > index &&
+        this.props.routes[routesKeys[index+1]] === route){
+        newState['previousProject'] = this.props.projects[routesKeys[index]]
+        newState['previousProjectRoute'] = this.props.routes[routesKeys[index]]
+      }
+      // Check for next project
+      if (this.props.routes[key] === route && 
+        routesKeys.length > index &&
+        routesKeys[index+1].startsWith('projects')){
+        newState['nextProject'] = this.props.projects[routesKeys[index+1]]
+        newState['nextProjectRoute'] = this.props.routes[routesKeys[index+1]]
+      }
+    })
+    this.setState(newState)
   }
 
-  initialiseGallery = (e, i) => {
+  initialiseGallery = (thisComp) => {
     var pswpEle = document.querySelector('.pswp')
 
     // define options (if needed)
@@ -55,7 +73,6 @@ class ProjectPageTemplate extends Component {
       getDoubleTapZoom: function(isMouseClick, item) {
         return item.initialZoomLevel;
       },
-      pinchToClose: false,
       addCaptionHTMLFn: function(item, captionEl, isFake) {
         const hasTitle = item.title && item.title !== ''
         const hasDesc = item.description && item.description !== ''
@@ -74,7 +91,7 @@ class ProjectPageTemplate extends Component {
 
     // Initializes and opens PhotoSwipe
     /*eslint-disable no-undef*/
-    var gallery = new PhotoSwipe( pswpEle, PhotoSwipeUI_Default, this.photoswipeItems, options);
+    var gallery = new PhotoSwipe( pswpEle, PhotoSwipeUI_Default, thisComp.props.photoswipeItems, options);
     gallery.listen('updateScrollOffset', function(_offset) {
         var r = pswpEle.getBoundingClientRect();
         _offset.x += r.left;
@@ -87,8 +104,11 @@ class ProjectPageTemplate extends Component {
   render(){
     let thisComp = this
     window.requestAnimationFrame(function() {
-      thisComp.initialiseGallery()
+      window.scrollTo(0, 0)
+      thisComp.initialiseGallery(thisComp)
     });
+
+    const {previousProject, previousProjectRoute, nextProject, nextProjectRoute} = this.state
     
     return (
       <Page
@@ -100,22 +120,23 @@ class ProjectPageTemplate extends Component {
                 placement="bottom"
                 overlay={
                   <Tooltip id="button-tooltip">
-                    <b>{this.projectWebsite ? 'Visit website' : 'Currently offline'}</b>
+                    <b>{this.props.clientHomepage ? 'Visit website' : 'Currently offline'}</b>
                   </Tooltip>
                 }
               >
-                {this.projectWebsite ?
-                  <a href={this.projectWebsite}>
-                    <img src={this.projectLogoURL} className="w-100 project-logo " />
+                {this.props.clientHomepage ?
+                  <a href={this.props.clientHomepage}>
+                    <img src={this.props.projectLogoURL} className="w-100 project-logo " />
                   </a>
                   :
-                  <img src={this.projectLogoURL} className="w-100 project-logo " />
+                  <img src={this.props.projectLogoURL} className="w-100 project-logo " />
                 }
               </OverlayTrigger>
             </Col>
             <Col sm={10}>
-              <h3 className="project-title ">{this.projectTitle}</h3>
-              <p className="project-subheading  font-italic">{this.projectSubtitle}</p>
+              <h3 className="project-title ">{this.props.projectTitle}</h3>
+              {this.props.projectWebsite && <a className="project-website font-italic">{this.props.projectWebsite}</a>}
+              <p className="project-subheading font-italic">{this.props.projectSubtitle}</p>
             </Col>
             <Col sm={12} className="mt-3 pswp-col">
               {pswpElement}
@@ -123,13 +144,13 @@ class ProjectPageTemplate extends Component {
             <Col sm={6} className="features-col mt-3">
               <p className="">Features:</p>
               <ul>
-                {this.projectFeatures.map(item => <li>{item}</li>)}
+                {this.props.projectFeatures.map(item => <li>{item}</li>)}
               </ul>
             </Col>
             <Col sm={6} className="made-with-col mt-3 text-right">
               <p className="">Made with:</p>
               <ul className="logo-list">
-                {this.projectMadeWith.map(item => 
+                {this.props.projectMadeWith.map(item => 
                   <OverlayTrigger
                     placement="bottom"
                     overlay={
@@ -147,6 +168,29 @@ class ProjectPageTemplate extends Component {
                 )}
               </ul>
             </Col>
+              {(previousProject || nextProject) && <hr/>}
+              {previousProject &&
+                    <ProjectTile
+                      title={previousProject.title}
+                      projectURL={previousProjectRoute}
+                      imgURL={previousProject.imgURL}
+                      imgAlt={previousProject.imgAlt}
+                      defaultOpaque={false}
+                      heading={<h4 className="project-tile-heading text-left"><i class="fas fa-long-arrow-alt-left"></i> Previous<span className="d-none d-md-inline"> project</span></h4>}
+                      className={`col-6 col-sm-6 col-md-4 col-lg-3`}
+                    />
+              }
+              {nextProject &&
+                    <ProjectTile
+                      title={nextProject.title}
+                      projectURL={nextProjectRoute}
+                      imgURL={nextProject.imgURL}
+                      imgAlt={nextProject.imgAlt}
+                      defaultOpaque={false}
+                      heading={<h4 className="project-tile-heading text-right">Next<span className="d-none d-md-inline"> project</span> <i class="fas fa-long-arrow-alt-right"></i></h4>}
+                      className={`col-6 col-sm-6 col-md-4 col-lg-3 ${previousProject ? 'offset-md-4 offset-lg-6' : 'offset-sm-6 offset-md-8 offset-lg-9'}`}
+                    />
+              }
           </Row>
         }
       />)
@@ -156,6 +200,9 @@ class ProjectPageTemplate extends Component {
 const mapStateToProps = state => ({
   history: state.site.history,
   routes: state.site.routes,
+  projects: state.site.projects,
 });
 
-export default ProjectPageTemplate
+// export default ProjectPageTemplate
+
+export default connect(mapStateToProps, { setPageContentSelector })(ProjectPageTemplate);

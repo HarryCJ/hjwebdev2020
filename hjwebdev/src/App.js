@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import { Container, Table, Row, Col, Navbar, Breadcrumb, Dropdown, DropdownButton, Form, Alert, Spinner } from 'react-bootstrap'
 import anime from 'animejs';
@@ -11,49 +10,13 @@ import { createBrowserHistory } from 'history';
 import DelayLink from './components/DelayLink.js'
 import { connect } from 'react-redux'
 import { setPageOpacity } from './redux/actions/siteActions'
-import ProjectsSPGPage from './ProjectsSPGPage.js'
-import ProjectsPage from './ProjectsPage.js'
-import SMProjectPage from './projects/SMProjectPage.js'
+import ProjectsPage from './pages/ProjectsPage.js'
+import AboutPage from './pages/AboutPage.js'
+import ServicesPage from './pages/ServicesPage.js'
+import ContactPage from './pages/ContactPage.js'
 import SABProjectPage from './projects/SABProjectPage.js'
+import SMProjectPage from './projects/SMProjectPage.js'
 import ABProjectPage from './projects/ABProjectPage.js'
-class projectsSABPage extends Component {
-  render(){
-    return (
-      <Page
-        inner={
-          <>
-            <h2>Hello world</h2>
-          </>
-        }
-      />)
-  }
-}
-
-class projectsABPage extends Component {
-  render(){
-    return (
-      <Page
-        inner={
-          <>
-            <h2>Hello world</h2>
-          </>
-        }
-      />)
-  }
-}
-
-// class projectsSamAndMaxPage extends Component {
-//   render(){
-//     return (
-//       <Page
-//         inner={
-//           <>
-//             <h2>Hello world</h2>
-//           </>
-//         }
-//       />)
-//   }
-// }
 
 class App extends Component {
 
@@ -76,16 +39,32 @@ class App extends Component {
       ],
       // pageContent: '.rightSide > div',
     }
-    this.paths = [
-      {name: this.props.routes.home, value: <ProjectsPage/>},
-      {name: this.props.routes.projects, value: <ProjectsPage/>},
+    this.projectPages = [
       {name: this.props.routes.projectsSAB, value: <SABProjectPage/>},
       {name: this.props.routes.projectsAB, value: <ABProjectPage/>},
       {name: this.props.routes.projectsSamAndMax, value: <SMProjectPage/>},
-      {name: this.props.routes.projectsSPG, value: <ProjectsSPGPage/>},
-      // {name: this.props.routes.about, value: <ProjectsPage/>},
+    ]
+    // {
+    //   projectURL: this.props.routes.projectsSamAndMax,
+    //   imgURL: "/samandmax.png",
+    // }
+    this.paths = [
+      {name: this.props.routes.home, value: <ProjectsPage/>},
+      {name: this.props.routes.projects, value: <ProjectsPage/>},
+      ...this.projectPages,
+      {name: this.props.routes.about, value: <AboutPage/>},
+      {name: this.props.routes.services, value: <ServicesPage/>},
+      {name: this.props.routes.contact, value: <ContactPage/>},
     ]
   }
+
+  // getNextProject = (route) => {
+  //   const projectIndex = projectPages.find((item, index) => item.name === route ? index : false)
+  //   if (this.projectPages.length < projectIndex+1){
+  //     return this.projectPages[projectIndex+1]
+  //   }
+  //   return null
+  // }
 
   AnimatePageContent = (pageContent, delay) => {
     // anime({
@@ -96,7 +75,9 @@ class App extends Component {
     //   delay: 1500,
     //   easing: 'easeInOutQuad',
     // });
-
+    anime.remove(pageContent)
+    document.querySelectorAll(pageContent).forEach(ele => ele.style.removeProperty('opacity'))
+    // setTimeout(() => {
     anime({
       targets: pageContent,
       opacity: [
@@ -110,6 +91,7 @@ class App extends Component {
       // ],
       delay: anime.stagger(200, {easing: 'easeInSine'}),
     })
+  // }, 100)
     // setTimeout(() => {
     //   document.querySelectorAll(pageContent).forEach(e => e.style.transform = '')
     // }, delay)
@@ -207,40 +189,39 @@ class App extends Component {
       })
 
       setTimeout(() => {
-        document.querySelector(links[0]).classList.add('active')
+        this.setActiveLink(true)
       }, 1800)
-      // setTimeout(() => {
-        // document.querySelector(links[0]).classList.add("active")
-      // }, 750)
+  }
+
+  setActiveLink = (isInitial) => {
+    const {links} = this.selectors
+    const previousActive = document.querySelector('.nav-links .active')
+    previousActive && previousActive.classList.remove('active')
+    if (previousActive || isInitial){
+      let link = links[0]
+      if (window.location.hash === '#about') link = links[1]
+      else if (window.location.hash === '#services') link = links[2]
+      else if (window.location.hash === '#contact') link = links[3]
+      document.querySelector(link).classList.add('active')
+    }
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log("app.js componentWillReceiveProps")
+    const { pageContentSelector } = nextProps
+    if (pageContentSelector) {
 
-      const { pageContentSelector } = nextProps
-      if (pageContentSelector) {
-        this.AnimatePageContent(pageContentSelector, 1000)
-      }
+      this.setActiveLink(false)
+      // const target = e.target
+      // setTimeout(() => target.classList.add('active'), 50)
+
+      console.log("firing AnimatePageContent")
+      this.AnimatePageContent(pageContentSelector, 1000)
+    }
   }
 
   textWrapper = (text, className) => {
     return <span dangerouslySetInnerHTML={{__html: text.replace(/\S/g, "<span class='"+className+"'>$&</span>")}}/>
-  }
-
-  setActive = e => {
-    const previousActive = document.querySelector('.nav-links .active')
-    // previousActive.animationName = ''
-    // previousActive.animationName = null
-    // e.target.style.color = 'rgba(255, 254, 255, 0.5)'
-    // previousActive.style.marginRight = '0px'
-    previousActive.classList.remove('active')
-
-    const target = e.target
-
-    // var newone = e.target.cloneNode(true);
-    // e.target.style.color = 'rgba(255, 254, 255, 0.5)'
-    // e.target.style.marginRight = '0px'
-    setTimeout(() => target.classList.add('active'), 50)
-    // e.target.parentNode.replaceChild(newone, e.target);
   }
 
   render() {
@@ -253,10 +234,10 @@ class App extends Component {
     const appSubtitle = (isMobile) => <h2 className={`app-subtitle ${isMobile ? 'd-block d-sm-none' : 'd-none d-sm-block'}`}>{this.textWrapper('Freelance full-stack developer', 'defaultOpaque letter')}</h2>
     const navLinks = 
       <div className="nav-links">
-        <Link className="defaultOpaque" onClick={this.setActive} to={this.props.routes.projects}>Projects</Link>
-        <Link className="defaultOpaque" onClick={this.setActive} to={this.props.routes.about}>About</Link>
-        <a className="defaultOpaque" onClick={this.setActive} href="#">Services</a>
-        <a className="defaultOpaque" onClick={this.setActive} href="#">Contact</a>
+        <Link className="defaultOpaque" to={this.props.routes.projects}>Projects</Link>
+        <Link className="defaultOpaque" to={this.props.routes.about}>About</Link>
+        <Link className="defaultOpaque" to={this.props.routes.services}>Services</Link>
+        <Link className="defaultOpaque" to={this.props.routes.contact}>Contact</Link>
       </div>
 
     return (
@@ -280,19 +261,9 @@ class App extends Component {
           <Col sm={8} md={10} className="rightSide">
             <div className="mt-3">
               {
-                
                 (currentPage && currentPage.value) || <ProjectsPage/>
               }
-
-                {/**<Switch>
-                                              <Route exact path={this.props.routes.home} component={ProjectsPage}/>
-                                              <Route exact path={this.props.routes.projects}  component={ProjectsPage}/>
-                                              <Route exact path={this.props.routes.projectsSAB}  component={projectsSABPage}/>
-                                              <Route exact path={this.props.routes.projectsAB}  component={projectsABPage}/>
-                                              <Route exact path={this.props.routes.projectsSamAndMax}  component={projectsSamAndMaxPage}/>
-                                              <Route exact path={this.props.routes.projectsSPG}  component={ProjectsSPGPage}/>
-                                            </Switch>
-                            **/}            </div>
+            </div>
           </Col>
         </Row>
               </Router>
