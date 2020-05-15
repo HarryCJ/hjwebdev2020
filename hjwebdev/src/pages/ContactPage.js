@@ -60,7 +60,13 @@ class ContactPage extends Component {
         message => {
           if (message === 'OK'){
             // Success
-            this.setState({contactSuccess: true, contactError: null})
+            this.setState({
+              contactSuccess: true, 
+              contactError: null,
+              contactName: '',
+              contactEmail: '',
+              contactMessage: '',
+            })
           } else {
             this.setState({contactSuccess: false, contactError: 'There was a problem submitting the form. Please contact me directly.'})
           }
