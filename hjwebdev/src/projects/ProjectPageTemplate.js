@@ -188,7 +188,7 @@ class ProjectPageTemplate extends Component {
                       imgAlt={nextProject.imgAlt}
                       defaultOpaque={false}
                       heading={<h4 className="project-tile-heading text-right">Next<span className="d-none d-md-inline"> project</span> <i class="fas fa-long-arrow-alt-right"></i></h4>}
-                      className={`col-6 col-sm-6 col-md-4 col-lg-3 ${previousProject ? 'offset-md-4 offset-lg-6' : 'offset-sm-6 offset-md-8 offset-lg-9'}`}
+                      className={`col-6 col-sm-6 col-md-4 col-lg-3 ${previousProject ? 'offset-md-4 offset-lg-6' : 'offset-6 offset-md-8 offset-lg-9'}`}
                     />
               }
           </Row>

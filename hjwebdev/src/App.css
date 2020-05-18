@@ -265,7 +265,7 @@ a.underline-link {
 .mobile .pswp__button--arrow--right {
   /*margin-left: -50px;*/
     top: 92%;
-    z-index: 100;
+    z-index: 500;
     background-color: transparent !important;
 }
 
