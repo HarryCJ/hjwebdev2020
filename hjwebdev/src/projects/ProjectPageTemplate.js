@@ -135,7 +135,7 @@ class ProjectPageTemplate extends Component {
             </Col>
             <Col sm={10}>
               <h3 className="project-title ">{this.props.projectTitle}</h3>
-              {this.props.projectWebsite && <a className="project-website font-italic">{this.props.projectWebsite}</a>}
+              {this.props.projectWebsite && <a href={this.props.projectWebsite} className="project-website font-italic">{this.props.projectWebsite}</a>}
               <p className="project-subheading font-italic">{this.props.projectSubtitle}</p>
             </Col>
             <Col sm={12} className="mt-3 pswp-col">

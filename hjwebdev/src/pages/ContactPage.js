@@ -86,54 +86,52 @@ class ContactPage extends Component {
         className="row defaultOpaque"
         inner={
           <>
-            <Row className="pl-3">
-              <Col sm={12}>
-                <p className="pb-2">Get in touch for a free consultation, if you have any questions, or for anything else!</p>
-              </Col>
-              <Col sm={6} className="mb-4">
-                <Form.Control 
-                  type="text" 
-                  placeholder="Your name" 
-                  name="contactName" 
-                  id="contactName" 
-                  onChange={this.handleChange} 
-                  value={contactName}
-                />
-                {nameError && <p className="form-error">{nameError}</p>}
-              </Col>
-              <Col sm={6} className="mb-4">
-                <Form.Control 
-                  type="text" 
-                  placeholder="Your email" 
-                  name="contactEmail" 
-                  id="contactEmail" 
-                  onChange={this.handleChange} 
-                  value={contactEmail}
-                />
-                {emailError && <p className="form-error">{emailError}</p>}
-              </Col>
-              <Col sm={12} className="mb-4">
-                <Form.Control 
-                  as="textarea" 
-                  placeholder="Your message" 
-                  name="contactMessage" 
-                  id="contactMessage" 
-                  onChange={this.handleChange} 
-                  value={contactMessage}
-                />
-                {messageError && <p className="form-error">{messageError}</p>}
-              </Col>
-              <Col sm={12}>
-                {!contactSuccess ?
-                  <Button variant="info" className="float-right" onClick={this.handleSubmit}>Submit</Button>
-                  :
-                  <Button variant="success" className="float-right" disabled={true} >Successfully sent</Button>
-                }
-                
-                <p className=""><i>You can also reach me at 07874339969 on weekdays between 9AM and 6PM (GMT), or email me directly at hjwebdev@gmail.com.</i></p>
-                {contactError && <p className="form-error text-right">{contactError}</p>}
-              </Col>
-            </Row>
+            <Col sm={12}>
+              <p className="pb-2">Get in touch for a free consultation, if you have any questions, or for anything else!</p>
+            </Col>
+            <Col sm={6} className="mb-4 name-container">
+              <Form.Control 
+                type="text" 
+                placeholder="Your name" 
+                name="contactName" 
+                id="contactName" 
+                onChange={this.handleChange} 
+                value={contactName}
+              />
+              {nameError && <p className="form-error">{nameError}</p>}
+            </Col>
+            <Col sm={6} className="mb-4 email-container">
+              <Form.Control 
+                type="text" 
+                placeholder="Your email" 
+                name="contactEmail" 
+                id="contactEmail" 
+                onChange={this.handleChange} 
+                value={contactEmail}
+              />
+              {emailError && <p className="form-error">{emailError}</p>}
+            </Col>
+            <Col sm={12} className="mb-4 message-container">
+              <Form.Control 
+                as="textarea" 
+                placeholder="Your message" 
+                name="contactMessage" 
+                id="contactMessage" 
+                onChange={this.handleChange} 
+                value={contactMessage}
+              />
+              {messageError && <p className="form-error">{messageError}</p>}
+            </Col>
+            <Col sm={12}>
+              {!contactSuccess ?
+                <Button variant="info" className="float-right" onClick={this.handleSubmit}>Submit</Button>
+                :
+                <Button variant="success" className="float-right" disabled={true} >Successfully sent</Button>
+              }
+              
+              <p className=""><i>You can also reach me at 07874339969 on weekdays between 9AM and 6PM (GMT), or email me directly at hjwebdev@gmail.com.</i></p>
+              {contactError && <p className="form-error text-right">{contactError}</p>}
+            </Col>
           </>
         }
       />)
