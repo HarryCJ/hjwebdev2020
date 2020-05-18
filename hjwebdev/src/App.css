@@ -269,6 +269,10 @@ a.underline-link {
     background-color: transparent !important;
 }
 
+/*.pswp--touch .pswp__button--arrow--left, .pswp--touch .pswp__button--arrow--right {
+    visibility: visible;
+}*/
+
 .mobile .pswp--zoomed-in .pswp__button--arrow--right,
 .mobile .pswp--zoomed-in .pswp__button--arrow--left {
     background-color: transparent !important;
