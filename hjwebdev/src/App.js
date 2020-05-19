@@ -182,7 +182,7 @@ class App extends Component {
         <Link className="defaultOpaque" to={this.props.routes.about}>About</Link>
         <Link className="defaultOpaque" to={this.props.routes.services}>Services</Link>
         <Link className="defaultOpaque" to={this.props.routes.contact}>Contact</Link>
-        <a className="defaultOpaque" href="https://github.com/HarryCJ/harrycj.github.io/tree/master/hjwebdev"><i className="fas fa-code"/></a>
+        <a className="defaultOpaque" target="blank" href="https://github.com/HarryCJ/harrycj.github.io/tree/master/hjwebdev"><i className="fas fa-code"/></a>
       </div>
 
     return (

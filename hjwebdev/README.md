@@ -1,4 +1,4 @@
-## Website for <a href="hjwebdev.com">Harry Johnson Web Development</a>.
+## Website for <a href="http://hjwebdev.com/">Harry Johnson Web Development</a>.
 
 ### `npm run start`
 
