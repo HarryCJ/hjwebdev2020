@@ -255,7 +255,7 @@ class App extends Component {
             {appTitle(false)}
             {appSubtitle(false)}
           </Col>
-          <Col sm={4} md={2} className="leftSide">
+          <Col sm={4} md={2} className="leftSide" style={{ display: 'flex', flexDirection: 'row-reverse'}}>
             {!isMobile && navLinks}
           </Col>
           <Col sm={8} md={10} className="rightSide">
