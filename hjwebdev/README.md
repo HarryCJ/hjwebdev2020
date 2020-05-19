@@ -1,4 +1,4 @@
-## Website for Harry Johnson Web Development.
+## Website for <a href="hjwebdev.com">Harry Johnson Web Development</a>.
 
 ### `npm run start`
 
@@ -10,4 +10,4 @@ Builds the app for production to the `build` folder and copies files to root dir
 
 ## 
 
-This project is licensed under the terms of the MIT license
+This project is licensed under the terms of the MIT license.

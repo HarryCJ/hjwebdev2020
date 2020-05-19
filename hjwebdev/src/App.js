@@ -31,6 +31,7 @@ class App extends Component {
         '.leftSide > .nav-links > a:nth-child(2)',
         '.leftSide > .nav-links > a:nth-child(3)',
         '.leftSide > .nav-links > a:nth-child(4)',
+        '.leftSide > .nav-links > a:nth-child(5)',
       ],
     }
     this.projectPages = [
@@ -126,6 +127,7 @@ class App extends Component {
           links[1],
           links[2],
           links[3],
+          links[4],
         ],
         opacity: 1,
         duration: 500,
@@ -180,6 +182,7 @@ class App extends Component {
         <Link className="defaultOpaque" to={this.props.routes.about}>About</Link>
         <Link className="defaultOpaque" to={this.props.routes.services}>Services</Link>
         <Link className="defaultOpaque" to={this.props.routes.contact}>Contact</Link>
+        <a className="defaultOpaque" href="https://github.com/HarryCJ/harrycj.github.io/tree/master/hjwebdev"><i className="fas fa-code"/></a>
       </div>
 
     return (
