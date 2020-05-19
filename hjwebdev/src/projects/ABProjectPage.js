@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { setPageContentSelector } from '../redux/actions/siteActions'
 import ProjectPageTemplate from './ProjectPageTemplate.js'
 
 class ABProjectPage extends Component {
-
-  constructor(props){
-    super(props)
-  }
 
   render(){
     return (
@@ -53,9 +47,4 @@ class ABProjectPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  history: state.site.history,
-  routes: state.site.routes,
-});
-
-export default connect(mapStateToProps, { setPageContentSelector })(ABProjectPage);
+export default ABProjectPage

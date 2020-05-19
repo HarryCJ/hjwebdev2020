@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
-// import { Container, Table, Row, Col, Navbar, Breadcrumb, Dropdown, DropdownButton, Form, Alert, Spinner } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import DelayLink from './DelayLink.js'
-import { createBrowserHistory } from 'history';
 import { connect } from 'react-redux'
-import { setPageOpacity } from '../redux/actions/siteActions'
 
 class ProjectTile extends Component {
 
   render(){
     return (
-      <DelayLink 
-      	delay={250} 
+      <Link 
       	to={this.props.projectURL} 
       	history={this.props.history} 
       	className={`${this.props.defaultOpaque ? 'defaultOpaque' : ''} ${this.props.className ? this.props.className : ''} project-tile`}
@@ -19,7 +14,7 @@ class ProjectTile extends Component {
         {this.props.heading && this.props.heading}
         <img src={this.props.imgURL} className="w-100" alt={this.props.imgAlt} />
         <h3 className="mt-2 mb-0">{this.props.title}</h3>
-      </DelayLink>
+      </Link>
     );
   }
 }
@@ -28,4 +23,4 @@ const mapStateToProps = state => ({
   history: state.site.history,
 });
 
-export default connect(mapStateToProps, { setPageOpacity })(ProjectTile);
+export default connect(mapStateToProps)(ProjectTile);

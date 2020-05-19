@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Container, Table, Row, Col, Navbar, Breadcrumb, Dropdown, DropdownButton, Form, Alert, Spinner } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import anime from 'animejs';
-import Page from './components/Page.js'
-import ProjectTile from './components/ProjectTile.js'
 import { Router } from "react-router";
-import { Route, Switch, Link } from 'react-router-dom'
-import { createBrowserHistory } from 'history';
-import DelayLink from './components/DelayLink.js'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { setPageOpacity } from './redux/actions/siteActions'
 import ProjectsPage from './pages/ProjectsPage.js'
 import AboutPage from './pages/AboutPage.js'
 import ServicesPage from './pages/ServicesPage.js'
@@ -37,17 +32,12 @@ class App extends Component {
         '.leftSide > .nav-links > a:nth-child(3)',
         '.leftSide > .nav-links > a:nth-child(4)',
       ],
-      // pageContent: '.rightSide > div',
     }
     this.projectPages = [
       {name: this.props.routes.projectsSAB, value: <SABProjectPage/>},
       {name: this.props.routes.projectsAB, value: <ABProjectPage/>},
       {name: this.props.routes.projectsSamAndMax, value: <SMProjectPage/>},
     ]
-    // {
-    //   projectURL: this.props.routes.projectsSamAndMax,
-    //   imgURL: "/samandmax.png",
-    // }
     this.paths = [
       {name: this.props.routes.home, value: <ProjectsPage/>},
       {name: this.props.routes.projects, value: <ProjectsPage/>},
@@ -58,43 +48,21 @@ class App extends Component {
     ]
   }
 
-  // getNextProject = (route) => {
-  //   const projectIndex = projectPages.find((item, index) => item.name === route ? index : false)
-  //   if (this.projectPages.length < projectIndex+1){
-  //     return this.projectPages[projectIndex+1]
-  //   }
-  //   return null
-  // }
-
   AnimatePageContent = (pageContent, delay) => {
-    // anime({
-    //   targets: pageContent,
-    //   keyframes: [
-    //     {opacity: 1, duration: 500},
-    //   ],
-    //   delay: 1500,
-    //   easing: 'easeInOutQuad',
-    // });
     anime.remove(pageContent)
     document.querySelectorAll(pageContent).forEach(ele => ele.style.removeProperty('opacity'))
-    // setTimeout(() => {
     anime({
       targets: pageContent,
       opacity: [
         {value: 0, duration: delay},
         {value: 1, easing: 'easeInOutQuad', duration: 750},
       ],
-      // scale: [
-      //   {value: 1, easing: 'easeInQuad', duration: delay},
-      //   {value: 1.025, easing: 'easeInQuad', duration: 200},
-      //   {value: 1, easing: 'easeOutQuad', duration: 200},
-      // ],
       delay: anime.stagger(200, {easing: 'easeInSine'}),
     })
-  // }, 100)
-    // setTimeout(() => {
-    //   document.querySelectorAll(pageContent).forEach(e => e.style.transform = '')
-    // }, delay)
+  }
+
+  componentWillUnmount() {
+      this.unlisten();
   }
 
   componentDidMount(){
@@ -102,8 +70,7 @@ class App extends Component {
         currentPage: this.paths.find(path => path.name === window.location.hash)
       })
 
-      const unlisten = this.props.history.listen((location, action) => {
-        // console.log(window.location.hash, this.paths, this.paths.find(path => path.name === window.location.hash))
+      this.unlisten = this.props.history.listen((location, action) => {
         this.setState({
           currentPage: this.paths.find(path => path.name === window.location.hash)
         }, () => {
@@ -113,26 +80,14 @@ class App extends Component {
       });
 
       const {
-        logo, title, titleLetters,
-        links, subTitle, subTitleLetters,
+        titleLetters,
+        links, subTitleLetters,
       } = this.selectors
-
-      const { pageContentSelector } = this.props
-
-      // anime({
-      //   targets: logo,
-      //   width: '115%',
-      //   duration: 20000,
-      //   easing: 'easeInOutBack',
-      //   delay: 500,
-      //   loop: true,
-      //   direction: 'alternate',
-      // })
 
       anime({
         targets: titleLetters,
         opacity: 1,
-        duration: 500,//anime.stagger(200),
+        duration: 500,
         easing: 'easeInSine',
         scale: [
           {value: 1.05, easing: 'easeInQuad', duration: 200},
@@ -144,7 +99,7 @@ class App extends Component {
       anime({
         targets: subTitleLetters,
         opacity: 1,
-        duration: 500,//anime.stagger(200),
+        duration: 500,
         easing: 'easeInSine',
         scale: [
           {value: 1.05, easing: 'easeInQuad', duration: 200},
@@ -153,13 +108,11 @@ class App extends Component {
         delay: anime.stagger(25, {start: 750}),
       })
 
-      console.log("currentPage", window.location.hash)
-
       if (window.location.hash === ''){
         anime({
           targets: '.top-padding',
           paddingTop: '0vh',
-          duration: 1500,//anime.stagger(200),
+          duration: 1500,
           easing: 'easeInOutQuad',
           delay: 500,
         })
@@ -175,16 +128,12 @@ class App extends Component {
           links[3],
         ],
         opacity: 1,
-        duration: 500,//anime.stagger(200),
+        duration: 500,
         easing: 'easeInSine',
         scale: [
           {value: 1.01, easing: 'easeInQuad', duration: 200},
           {value: 1, easing: 'easeOutQuad', duration: 200},
         ],
-        // [
-        //   {value: 0, duration: 500},
-        //   {value: 1, easing: 'easeInSine', duration: 500},
-        // ],
         delay: anime.stagger(200, {start: 1000}),
       })
 
@@ -207,15 +156,9 @@ class App extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("app.js componentWillReceiveProps")
     const { pageContentSelector } = nextProps
     if (pageContentSelector) {
-
       this.setActiveLink(false)
-      // const target = e.target
-      // setTimeout(() => target.classList.add('active'), 50)
-
-      console.log("firing AnimatePageContent")
       this.AnimatePageContent(pageContentSelector, 1000)
     }
   }
@@ -225,7 +168,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("render", this.state)
     const {currentPage} = this.state
 
     const isMobile = window.innerWidth <= 575
@@ -242,31 +184,31 @@ class App extends Component {
 
     return (
       <div className={`${isFluid ? 'container-fluid' : 'container'} ${isMobile && 'mobile'}`}>
-              <Router history={this.props.history}>
-        <Row className="center-row pt-5">
-          <div className="top-padding"></div>
-          <Col sm={4} md={2} className="leftSide">
-            {isMobile && navLinks}
-            <img src="/logofinal.png" className="App-logo" alt="logo" />
-            {appTitle(true)}
-            {appSubtitle(true)}
-          </Col>
-          <Col sm={8} md={10} className="rightSide">
-            {appTitle(false)}
-            {appSubtitle(false)}
-          </Col>
-          <Col sm={4} md={2} className="leftSide" style={{ display: 'flex', flexDirection: 'row-reverse'}}>
-            {!isMobile && navLinks}
-          </Col>
-          <Col sm={8} md={10} className="rightSide">
-            <div className="mt-3">
-              {
-                (currentPage && currentPage.value) || <ProjectsPage/>
-              }
-            </div>
-          </Col>
-        </Row>
-              </Router>
+        <Router history={this.props.history}>
+          <Row className="center-row pt-5">
+            <div className="top-padding"></div>
+            <Col sm={4} md={2} className="leftSide">
+              {isMobile && navLinks}
+              <img src="/logofinal.png" className="App-logo" alt="logo" />
+              {appTitle(true)}
+              {appSubtitle(true)}
+            </Col>
+            <Col sm={8} md={10} className="rightSide">
+              {appTitle(false)}
+              {appSubtitle(false)}
+            </Col>
+            <Col sm={4} md={2} className="leftSide" style={{ display: 'flex', flexDirection: 'row-reverse'}}>
+              {!isMobile && navLinks}
+            </Col>
+            <Col sm={8} md={10} className="rightSide">
+              <div className="mt-3">
+                {
+                  (currentPage && currentPage.value) || <ProjectsPage/>
+                }
+              </div>
+            </Col>
+          </Row>
+        </Router>
       </div>
     );
   }
@@ -278,4 +220,4 @@ const mapStateToProps = state => ({
   pageContentSelector: state.site.pageContentSelector,
 });
 
-export default connect(mapStateToProps, { setPageOpacity })(App);
+export default connect(mapStateToProps)(App);

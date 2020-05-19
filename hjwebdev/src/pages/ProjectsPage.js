@@ -1,19 +1,12 @@
-import React, { Component } from 'react';
-import { Container, Table, Row, Col, Navbar, Breadcrumb, Dropdown, DropdownButton, Form, Alert, Spinner } from 'react-bootstrap'
-import anime from 'animejs';
+import React, { Component } from 'react'
 import Page from '../components/Page.js'
 import ProjectTile from '../components/ProjectTile.js'
-import { Router } from "react-router";
-import { Route, Switch, Link } from 'react-router-dom'
-import { createBrowserHistory } from 'history';
-import DelayLink from '../components/DelayLink.js'
 import { connect } from 'react-redux'
-import { setPageOpacity, setPageContentSelector } from '../redux/actions/siteActions'
+import { setPageContentSelector } from '../redux/actions/siteActions'
 
 class ProjectsPage extends Component {
 
   componentDidMount(){
-      // setTimeout(()=>this.props.setPageOpacity(1, 0), 10)
     this.props.setPageContentSelector(['.page', '.page .made-with-col li:nth-child(4)', '.page > projects'].join(', '))
 
       const projects = [
@@ -32,7 +25,6 @@ class ProjectsPage extends Component {
   }
 
   render(){
-      // this.props.setPageOpacity(1)
     return (
       <Page
         className="row"
@@ -69,8 +61,7 @@ class ProjectsPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  history: state.site.history,
   routes: state.site.routes,
 });
 
-export default connect(mapStateToProps, { setPageOpacity, setPageContentSelector })(ProjectsPage);
+export default connect(mapStateToProps, { setPageContentSelector })(ProjectsPage);

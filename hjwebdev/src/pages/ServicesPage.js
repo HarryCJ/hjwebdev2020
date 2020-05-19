@@ -1,14 +1,9 @@
-import React, { Component } from 'react';
-import { Container, Table, Row, Col, Navbar, Breadcrumb, Dropdown, DropdownButton, Form, Alert, Spinner } from 'react-bootstrap'
-import anime from 'animejs';
+import React, { Component } from 'react'
+import { Col } from 'react-bootstrap'
 import Page from '../components/Page.js'
-import ProjectTile from '../components/ProjectTile.js'
-import { Router } from "react-router";
-import { Route, Switch, Link } from 'react-router-dom'
-import { createBrowserHistory } from 'history';
-import DelayLink from '../components/DelayLink.js'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { setPageOpacity, setPageContentSelector } from '../redux/actions/siteActions'
+import { setPageContentSelector } from '../redux/actions/siteActions'
 
 class ServicesPage extends Component {
 
@@ -45,9 +40,4 @@ class ServicesPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  // history: state.site.history,
-  // routes: state.site.routes,
-});
-
-export default connect(mapStateToProps, { setPageContentSelector })(ServicesPage);
+export default connect(null, { setPageContentSelector })(ServicesPage);

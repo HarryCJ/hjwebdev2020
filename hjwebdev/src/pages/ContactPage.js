@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Table, Row, Col, Navbar, Breadcrumb, Dropdown, DropdownButton, Form, Alert, Spinner, Button } from 'react-bootstrap'
-import anime from 'animejs';
+import { Col, Form, Button } from 'react-bootstrap'
 import Page from '../components/Page.js'
-import ProjectTile from '../components/ProjectTile.js'
-import { Router } from "react-router";
-import { Route, Switch, Link } from 'react-router-dom'
-import { createBrowserHistory } from 'history';
-import DelayLink from '../components/DelayLink.js'
 import { connect } from 'react-redux'
-import { setPageOpacity, setPageContentSelector } from '../redux/actions/siteActions'
+import { setPageContentSelector } from '../redux/actions/siteActions'
 
 class ContactPage extends Component {
 
@@ -31,7 +25,6 @@ class ContactPage extends Component {
   }
 
   handleSubmit = event => {
-    console.log("handleSubmit")
     const {contactName, contactEmail, contactMessage} = this.state
     let nameError, emailError, messageError = null
     if (contactName.length === 0) nameError = 'This field is required.'
@@ -43,7 +36,6 @@ class ContactPage extends Component {
     })
     if (!nameError && !emailError && !messageError){
       // Submit
-      console.log("valid form")
       /*eslint-disable no-undef*/
       Email.send({
           SecureToken : "13c04aac-9bf7-4866-af02-4d5549b8dd75",
@@ -68,7 +60,7 @@ class ContactPage extends Component {
               contactMessage: '',
             })
           } else {
-            this.setState({contactSuccess: false, contactError: 'There was a problem submitting the form. Please contact me directly.'})
+            this.setState({contactSuccess: false, contactError: 'There was a problem submitting the form... Please contact me at hjwebdev@gmail.com'})
           }
         }
       );
@@ -138,9 +130,4 @@ class ContactPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  // history: state.site.history,
-  // routes: state.site.routes,
-});
-
-export default connect(mapStateToProps, { setPageContentSelector })(ContactPage);
+export default connect(null, { setPageContentSelector })(ContactPage);

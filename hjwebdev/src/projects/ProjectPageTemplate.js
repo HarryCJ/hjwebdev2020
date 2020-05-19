@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
-import '../App.css';
-import { Container, Table, Row, Col, Navbar, Breadcrumb, Dropdown, DropdownButton, Form, Alert, Spinner, Tooltip, OverlayTrigger  } from 'react-bootstrap'
-import anime from 'animejs';
+import { Row, Col, Tooltip, OverlayTrigger  } from 'react-bootstrap'
 import Page from '../components/Page.js'
 import ProjectTile from '../components/ProjectTile.js'
-import { Router } from "react-router";
-import { Route, Switch, Link } from 'react-router-dom'
-import { createBrowserHistory } from 'history';
-import DelayLink from '../components/DelayLink.js'
-import BackPageButton from '../components/BackPageButton.js'
 import { connect } from 'react-redux'
-import { setPageOpacity, toggleAlignCenter, setPageContentSelector } from '../redux/actions/siteActions'
+import { setPageContentSelector } from '../redux/actions/siteActions'
 import pswpElement from '../components/pswpElement.js'
 
 class ProjectPageTemplate extends Component {
@@ -28,14 +20,12 @@ class ProjectPageTemplate extends Component {
 
   componentDidMount(){
     this.props.setPageContentSelector(['.page', '.page .made-with-col'].join(', '))
-    console.log("this.props.routes", this.props.routes)
-    let isNextProjectRoute = false
     const route = window.location.hash
     const routesKeys = Object.keys(this.props.routes)
     let newState = {
       previousProject: null,
     }
-    routesKeys.some((key, index) => {
+    routesKeys.forEach((key, index) => {
       // Check for previous project
       if (routesKeys[index].startsWith('projects') &&
         routesKeys.length > index &&
@@ -57,7 +47,6 @@ class ProjectPageTemplate extends Component {
   initialiseGallery = (thisComp) => {
     var pswpEle = document.querySelector('.pswp')
 
-    // define options (if needed)
     var options = {
       history: false,
       maxSpreadZoom: 1,
@@ -126,10 +115,10 @@ class ProjectPageTemplate extends Component {
               >
                 {this.props.clientHomepage ?
                   <a href={this.props.clientHomepage}>
-                    <img src={this.props.projectLogoURL} className="w-100 project-logo " />
+                    <img src={this.props.projectLogoURL} alt="client logo" className="w-100 project-logo " />
                   </a>
                   :
-                  <img src={this.props.projectLogoURL} className="w-100 project-logo " />
+                  <img src={this.props.projectLogoURL} alt="client logo" className="w-100 project-logo " />
                 }
               </OverlayTrigger>
             </Col>
@@ -144,7 +133,7 @@ class ProjectPageTemplate extends Component {
             <Col sm={6} className="features-col mt-3">
               <p className="">Features:</p>
               <ul>
-                {this.props.projectFeatures.map(item => <li>{item}</li>)}
+                {this.props.projectFeatures.map(item => <li key={item}>{item}</li>)}
               </ul>
             </Col>
             <Col sm={6} className="made-with-col mt-3 text-right">
@@ -152,6 +141,7 @@ class ProjectPageTemplate extends Component {
               <ul className="logo-list">
                 {this.props.projectMadeWith.map(item => 
                   <OverlayTrigger
+                    key={item.title}
                     placement="bottom"
                     overlay={
                       <Tooltip id="button-tooltip">
@@ -161,7 +151,7 @@ class ProjectPageTemplate extends Component {
                   >
                     <li className="">
                       <a href={item.url}>
-                        <img src={item.logo} height="50"/>
+                        <img src={item.logo} alt={item.title} height="50"/>
                       </a>
                     </li>
                   </OverlayTrigger>
@@ -176,7 +166,7 @@ class ProjectPageTemplate extends Component {
                       imgURL={previousProject.imgURL}
                       imgAlt={previousProject.imgAlt}
                       defaultOpaque={false}
-                      heading={<h4 className="project-tile-heading text-left"><i class="fas fa-long-arrow-alt-left"></i> Previous<span className="d-none d-md-inline"> project</span></h4>}
+                      heading={<h4 className="project-tile-heading text-left"><i className="fas fa-long-arrow-alt-left"></i> Previous<span className="d-none d-md-inline"> project</span></h4>}
                       className={`col-6 col-sm-6 col-md-4 col-lg-3`}
                     />
               }
@@ -187,7 +177,7 @@ class ProjectPageTemplate extends Component {
                       imgURL={nextProject.imgURL}
                       imgAlt={nextProject.imgAlt}
                       defaultOpaque={false}
-                      heading={<h4 className="project-tile-heading text-right">Next<span className="d-none d-md-inline"> project</span> <i class="fas fa-long-arrow-alt-right"></i></h4>}
+                      heading={<h4 className="project-tile-heading text-right">Next<span className="d-none d-md-inline"> project</span> <i className="fas fa-long-arrow-alt-right"></i></h4>}
                       className={`col-6 col-sm-6 col-md-4 col-lg-3 ${previousProject ? 'offset-md-4 offset-lg-6' : 'offset-6 offset-md-8 offset-lg-9'}`}
                     />
               }
@@ -198,11 +188,8 @@ class ProjectPageTemplate extends Component {
 }
 
 const mapStateToProps = state => ({
-  history: state.site.history,
   routes: state.site.routes,
   projects: state.site.projects,
 });
-
-// export default ProjectPageTemplate
 
 export default connect(mapStateToProps, { setPageContentSelector })(ProjectPageTemplate);
