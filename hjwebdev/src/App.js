@@ -12,6 +12,7 @@ import ContactPage from './pages/ContactPage.js'
 import SABProjectPage from './projects/SABProjectPage.js'
 import SMProjectPage from './projects/SMProjectPage.js'
 import ABProjectPage from './projects/ABProjectPage.js'
+import GrowthEQProjectPage from './projects/GrowthEQProjectPage.js'
 
 class App extends Component {
 
@@ -35,6 +36,7 @@ class App extends Component {
       ],
     }
     this.projectPages = [
+      {name: this.props.routes.projectsGrowthEQ, value: <GrowthEQProjectPage/>},
       {name: this.props.routes.projectsSAB, value: <SABProjectPage/>},
       {name: this.props.routes.projectsAB, value: <ABProjectPage/>},
       {name: this.props.routes.projectsSamAndMax, value: <SMProjectPage/>},

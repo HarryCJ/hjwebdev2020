@@ -186,6 +186,8 @@ a.underline-link {
 .logo-list {
   margin-top: 10px;
   padding-left: 0px;
+    width: 190px;
+    margin-left: auto;
 }
 
 
@@ -230,7 +232,7 @@ a.underline-link {
 
 .mobile .pswp__button--arrow--left,
 .mobile .pswp__button--arrow--right {
-    top: 92%;
+    top: 95%;
     z-index: 500;
     background-color: transparent !important;
 }

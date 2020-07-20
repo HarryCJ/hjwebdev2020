@@ -116,12 +116,12 @@ class ContactPage extends Component {
             </Col>
             <Col sm={12}>
               {!contactSuccess ?
-                <Button variant="info" className="float-right" onClick={this.handleSubmit}>Submit</Button>
+                <Button variant="info" className="float-right pl-3" onClick={this.handleSubmit}>Submit</Button>
                 :
-                <Button variant="success" className="float-right" disabled={true} >Successfully sent</Button>
+                <Button variant="success" className="float-right pl-3" disabled={true} >Successfully sent</Button>
               }
               
-              <p className=""><i>You can also reach me at 07874339969 on weekdays between 9AM and 6PM (GMT), or email me directly at hjwebdev@gmail.com.</i></p>
+              <p className=""><i>You can also reach me at 07874339969 on weekdays between 9AM and 6PM (GMT), or email me directly at contact@hjwebdev.com.</i></p>
               {contactError && <p className="form-error text-right">{contactError}</p>}
             </Col>
           </>

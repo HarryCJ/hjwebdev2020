@@ -6,6 +6,7 @@ const initialState = {
 	routes: {
 	  home: "#",
 	  projects: "#projects",
+	  projectsGrowthEQ: "#projects-growtheq",
 	  projectsSAB: "#projects-sab",
 	  projectsSamAndMax: "#projects-samandmax",
 	  projectsAB: "#projects-ab",
@@ -17,6 +18,11 @@ const initialState = {
 	page_left: 0,
 	pageContentSelector: '', 
 	projects: {
+		projectsGrowthEQ: {
+			title: "Growth EQ Website",
+			imgURL: "/growtheq-logo.png",
+			imgAlt: "Growth EQ",
+		},
 		projectsSAB: {
 			title: "SAB Property Management App",
 			imgURL: "/sabapp.png",

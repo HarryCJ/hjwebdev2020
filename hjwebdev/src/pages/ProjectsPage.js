@@ -13,12 +13,14 @@ class ProjectsPage extends Component {
         '.page > .project-tile:nth-child(1)',
         '.page > .project-tile:nth-child(2)',
         '.page > .project-tile:nth-child(3)',
+        '.page > .project-tile:nth-child(4)',
       ]
 
       const projectPageSelector = [
         projects[0],
         projects[1],
         projects[2],
+        projects[3],
       ].join(', ')
 
       this.props.setPageContentSelector(projectPageSelector)
@@ -30,6 +32,14 @@ class ProjectsPage extends Component {
         className="row"
         inner={
           <>
+            <ProjectTile
+              title="Growth EQ Website"
+              projectURL={this.props.routes.projectsGrowthEQ}
+              imgURL="/growtheq.png"
+              imgAlt="Growth EQ"
+              defaultOpaque={true}
+              className='col-md-3 col-6'
+            />
             <ProjectTile
               title="SAB Property Management App"
               projectURL={this.props.routes.projectsSAB}
